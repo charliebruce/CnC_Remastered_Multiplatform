@@ -22,6 +22,7 @@ add_executable( cnc
     LZO1X_D.CPP
     LZO1X_C.CPP
     LCW.CPP
+    LZW.CPP
 
     PIPE.CPP
     BUFF.CPP
@@ -35,15 +36,19 @@ add_executable( cnc
     # as it was a hack,
     LZWOTRAW.CPP
     
+    # This is a complete hack - which needs to be coded
+    LCWCOMP.CPP
+    
     # Following files - do not compile
 
     # following files compile, but lack some other symbols bellow
-    # LZW.CPP
-    # LZWSTRAW.CPP
-    # LZWPIPE.CPP
-    # LZOSTRAW.CPP
-    # LCWSTRAW.CPP
-    
+    # Missing code is in ASM:
+    # REDALERT/LCWCOMP.ASM
+    # REDALERT/LCW.H
+    LZWPIPE.CPP
+    LZOSTRAW.CPP
+    LCWSTRAW.CPP
+
     # WIP - still not compiling
     # INI.CPP 
     # PK.CPP

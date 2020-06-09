@@ -36,7 +36,7 @@
 #ifndef LZWPIPE_H
 #define LZWPIPE_H
 
-#include	"PIPE.h"
+#include	"PIPE.H"
 
 
 /*
