@@ -21,6 +21,7 @@ add_executable( cnc
     SHA.CPP
     LZO1X_D.CPP
     LZO1X_C.CPP
+    LCW.CPP
 
     PIPE.CPP
     BUFF.CPP
@@ -28,19 +29,21 @@ add_executable( cnc
     LZOPIPE.CPP
     B64PIPE.CPP
     XPIPE.CPP
+    XSTRAW.CPP
+
     # Following file compiles - but needs to be tested,
     # as it was a hack,
     LZWOTRAW.CPP
     
     # Following files - do not compile
-    XSTRAW.CPP
 
     # following files compile, but lack some other symbols bellow
     # LZW.CPP
     # LZWSTRAW.CPP
     # LZWPIPE.CPP
-    # LZOSTRAW.CPP    
-
+    # LZOSTRAW.CPP
+    # LCWSTRAW.CPP
+    
     # WIP - still not compiling
     # INI.CPP 
     # PK.CPP
@@ -169,7 +172,6 @@ add_executable( cnc
     # LAYER.CPP
     # LCW.CPP
     # LCWPIPE.CPP
-    # LCWSTRAW.CPP
     # LCWUNCMP.CPP
     # LINK.CPP
     # LIST.CPP
