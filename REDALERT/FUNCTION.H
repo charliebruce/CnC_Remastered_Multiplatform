@@ -283,11 +283,11 @@ extern long LParam;
 #include	"MONOC.H"
 #include	"CONQUER.H"
 //#include	"debug.h"
-#include "special.h"
-#include	"defines.h"
-#include	"ccini.h"
-#include	"ccptr.h"
-#include	"bar.h"
+#include "SPECIAL.H"
+#include	"DEFINES.H"
+#include	"CCINI.H"
+#include	"CCPTR.H"
+#include	"BAR.H"
 
 /*
 **	Greenleaf specific includes.
@@ -299,6 +299,9 @@ extern long LParam;
 extern long Frame;
 CELL Coord_Cell(COORDINATE coord);
 
+
+// TODO - this should not be part of the include... this should be on the sources no?
+#if 0
 #include	"utracker.h"
 #include	"crate.h"
 #include	"rules.h"
@@ -395,6 +398,8 @@ CELL Coord_Cell(COORDINATE coord);
 #include	"readline.h"
 #include	"vortex.h"
 #include "egos.h"
+#endif
+
 #ifdef WIN32
 //#include	"pcx.h"
 #endif
@@ -417,7 +422,7 @@ bool InitDDraw(void);
 bool PlayMpegMovie(const char* name);
 #endif
 
-#include	"externs.h"
+#include	"EXTERNS.H"
 
 
 extern int Get_CD_Drive(void);
