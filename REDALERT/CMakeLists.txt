@@ -31,6 +31,9 @@ add_executable( cnc
     B64PIPE.CPP
     XPIPE.CPP
     XSTRAW.CPP
+    LZWPIPE.CPP
+    LZOSTRAW.CPP
+    LCWSTRAW.CPP
 
     # Following file compiles - but needs to be tested,
     # as it was a hack,
@@ -45,9 +48,6 @@ add_executable( cnc
     # Missing code is in ASM:
     # REDALERT/LCWCOMP.ASM
     # REDALERT/LCW.H
-    LZWPIPE.CPP
-    LZOSTRAW.CPP
-    LCWSTRAW.CPP
 
     # WIP - still not compiling
     # INI.CPP 
