@@ -415,7 +415,7 @@ void BuildingClass::Debug_Dump(MonoClass *mono) const
 {
 	Validate();
 	mono->Set_Cursor(0, 0);
-	mono->Print(
+	constexpr auto a = cp437string_array(
 		"┌Name:──────────────┬Mission:───┬TarCom:┬───────┬Radio:┬Coord:──┬────────┬St:─┐\n"
 		"│                   │           │       │       │      │        │        │    │\n"
 		"├──────────────┬N┬Y┬Health:─┬───┴─┬Turret:┬─────┴┬─Building:──┬Cargo:────┴────┤\n"
@@ -436,6 +436,8 @@ void BuildingClass::Debug_Dump(MonoClass *mono) const
 		"│Recoiling.....│ │ │                                                           \n"
 		"│To Display....│ │ │                                                           \n"
 		"└──────────────┴─┴─┘                                                           \n");
+	auto s = cp437string_view(a.data(), a.size());
+	mono->Print(&s);
 	mono->Set_Cursor(1, 1);mono->Printf("%s:%s", House->Class->IniName, Class->IniName);
 	mono->Set_Cursor(35, 3);mono->Printf("%02X:%02X", PrimaryFacing.Current(), PrimaryFacing.Desired());
 	mono->Set_Cursor(50, 3);
