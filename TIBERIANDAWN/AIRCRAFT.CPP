@@ -1987,8 +1987,8 @@ void AircraftClass::Debug_Dump(MonoClass *mono) const
 	mono->Set_Cursor(42, 1);mono->Printf("%04X", NavCom);
 	mono->Set_Cursor(66, 1);mono->Printf("%d", Altitude);
 	mono->Set_Cursor(44, 3);mono->Printf("%d", Get_Speed());
-	mono->Text_Print("X", 16 + (IsLanding?2:0), 12);
-	mono->Text_Print("X", 16 + (IsTakingOff?2:0), 13);
+	mono->Text_PrintX(16 + (IsLanding?2:0), 12);
+	mono->Text_PrintX(16 + (IsTakingOff?2:0), 13);
 	FootClass::Debug_Dump(mono);
 }
 #endif

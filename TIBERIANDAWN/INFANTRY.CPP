@@ -212,7 +212,7 @@ void InfantryClass::Debug_Dump(MonoClass *mono) const
 	auto s = cp437string_view(a.data(), a.size());
 	mono->Print(&s);
 	mono->Set_Cursor(1, 1);mono->Printf("%s:%s", House->Class->IniName, Class->IniName);
-	mono->Text_Print("X", 16 + (IsProne?2:0), 10);
+	mono->Text_PrintX(16 + (IsProne?2:0), 10);
 	mono->Set_Cursor(33, 7);mono->Printf("%2d", Fear);
 	mono->Set_Cursor(41, 7);mono->Printf("%2d", Doing);
 	FootClass::Debug_Dump(mono);

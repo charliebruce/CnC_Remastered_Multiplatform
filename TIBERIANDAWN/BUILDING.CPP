@@ -449,7 +449,7 @@ void BuildingClass::Debug_Dump(MonoClass *mono) const
 		mono->Printf("(empty)");
 	}
 
-	mono->Text_Print("X", 16 + (IsRepairing?2:0), 14);
+	mono->Text_PrintX(16 + (IsRepairing?2:0), 14);
 //	mono->Set_Cursor(44, 3);mono->Printf("%d", SAM);
 	mono->Set_Cursor(34, 1);mono->Printf("%04X", TarCom);
 	mono->Set_Cursor(28, 7);mono->Printf("%2d", Arm);

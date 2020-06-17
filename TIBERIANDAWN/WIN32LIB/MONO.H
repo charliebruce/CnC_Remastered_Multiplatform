@@ -114,10 +114,10 @@ class MonoClass {
 		void Printf(const char *text, ...);
 		void Printf(int text, ...);
 		void Text_Print(cp437string_view &text, int x, int y, char attrib=DEFAULT_ATTRIBUTE);
-		template <unsigned N>
-		constexpr void Text_Print(char const (&text)[N], int x, int y, char attrib=DEFAULT_ATTRIBUTE) {
-			constexpr auto a = cp437string_array(text);
-			Text_Print(cp437string_view(a.data(), a.size()), x, y, attrib);
+		void Text_PrintX(int x, int y, char attrib=DEFAULT_ATTRIBUTE) {
+			constexpr auto a = cp437string_array("X");
+			auto s = cp437string_view(a.data(), a.size());
+			Text_Print(s, x, y, attrib);
 		}
 		void Text_Print(int text, int x, int y, char attrib=DEFAULT_ATTRIBUTE);
 		void View(void);
