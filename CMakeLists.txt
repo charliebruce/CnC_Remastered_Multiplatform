@@ -7,4 +7,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 enable_testing()
 
+add_subdirectory(REDALERT)
 add_subdirectory(TIBERIANDAWN)
