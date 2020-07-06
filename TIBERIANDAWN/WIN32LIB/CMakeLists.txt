@@ -8,7 +8,6 @@ add_library(gbuffer_win32 STATIC
     GBUFFER.H
     ICONCACH.H
     MISC.H
-    MOUSEWW.CPP
     TILE.H
     WWSTD.H
 )

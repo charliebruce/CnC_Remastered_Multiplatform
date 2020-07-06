@@ -1,6 +1,13 @@
 
 #include "GBUFFER.H"
 
+void Block_Mouse(class GraphicBufferClass *) {
+}
+
+void Unblock_Mouse(class GraphicBufferClass *) {
+
+}
+
 #if 0
 LPDIRECTDRAW7 dd;
 LPDIRECTDRAWSURFACE7 surfaceFront;
