@@ -1,6 +1,17 @@
 
 #include "GBUFFER.H"
 
+unsigned char CurrentPalette[768];
+
+GameInFocus = true;
+
+/*
+** Pointer to a function we will call if we detect loss of focus
+*/
+void (*Gbuffer_Focus_Loss_Function)(void) = NULL;
+
+GraphicViewPortClass *LogicPage;
+
 void Block_Mouse(class GraphicBufferClass *) {
 }
 
@@ -49,6 +60,8 @@ void init() {
 
 int main() {
     
+    Build_Fading_Table(CurrentPalette, FadingGreen, GREEN, 110);
+
     GraphicBufferClass viewport;
     viewport.DD_Init(GBC_NONE);
 
