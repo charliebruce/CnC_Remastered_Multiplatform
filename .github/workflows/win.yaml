@@ -2,18 +2,80 @@ name: Build
 on: [push]
 
 jobs:
-  build_msvc:
-    name: Visual Studio Building
+  download_sdk:
+    name: Download Windows 8.1 SDK
     runs-on: windows-2019
     steps:
+    - name: Install Windows 8.1 SDK
+      shell: powershell
+      run: |
+        Invoke-WebRequest -Method Get -Uri https://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile sdksetup.exe -UseBasicParsing
+    - uses: actions/upload-artifact@v2
+      with:
+        name: windows8.1sdk
+        path: sdksetup.exe
+
+  checkout:
+    name: Git checkout
+    runs-on: windows-2019
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - uses: actions/upload-artifact@v2
+      with:
+        name: gitcheckout
+        path: "."
+
+  build_cmake:
+    name: CMake Building
+    runs-on: windows-2019
+    needs:
+    - checkout
+    - download_sdk
+    steps:
+    - name: Restore Windows 8.1 SDK
+      uses: actions/download-artifact@v2
+      with:
+        name: windows8.1sdk
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.0.0
     - name: Install Windows 8.1 SDK
       shell: powershell
       run: |
-        Invoke-WebRequest -Method Get -Uri https://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile sdksetup.exe -UseBasicParsing
         Start-Process -Wait sdksetup.exe -ArgumentList "/q", "/norestart", "/features", "OptionId.WindowsDesktopSoftwareDevelopmentKit", "OptionId.NetFxSoftwareDevelopmentKit"
-    - name: Checkout
-      uses: actions/checkout@v2
+    - name: Restore Git checkout
+      uses: actions/download-artifact@v2
+      with:
+        name: gitcheckout
+    - name: Build with CMake
+      uses: lukka/run-cmake@v2
+      with:
+        cmakeGenerator: VS16Win64
+    - name: CTest
+      shell: powershell
+      run: ctest -V -C Debug
+      working-directory: "${{ github.workspace }}/../../_temp"
+
+  build_msvc:
+    name: Visual Studio Building
+    runs-on: windows-2019
+    needs:
+    - checkout
+    - download_sdk
+    steps:
+    - name: Restore Windows 8.1 SDK
+      uses: actions/download-artifact@v2
+      with:
+        name: windows8.1sdk
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v1.0.0
+    - name: Install Windows 8.1 SDK
+      shell: powershell
+      run: |
+        Start-Process -Wait sdksetup.exe -ArgumentList "/q", "/norestart", "/features", "OptionId.WindowsDesktopSoftwareDevelopmentKit", "OptionId.NetFxSoftwareDevelopmentKit"
+    - name: Restore Git checkout
+      uses: actions/download-artifact@v2
+      with:
+        name: gitcheckout
     - name: Compile
       run: msbuild CnCRemastered.sln
