@@ -8,5 +8,5 @@ add_library(TD_MIXFILE
 )
 
 target_include_directories(TD_MIXFILE PRIVATE
-    linuxlib
+    platformlib
 )
