@@ -55,6 +55,13 @@ class MixFileClass : public LinkClass
 		static bool Offset(char const *filename, void ** realptr = 0, MixFileClass ** mixfile = 0, std::int32_t * offset = 0, std::int32_t * size = 0);
 		static void const * Retrieve(char const *filename);
 
+		template <class Func>
+		void Foreach(Func func) {
+			for (int i = 0; i != Count; ++i) {
+				func(Buffer[i]);
+			}
+		}
+
 		struct SubBlock {
 			std::int32_t CRC;				// CRC code for embedded file.
 			std::int32_t Offset;			// Offset from start of data section.
