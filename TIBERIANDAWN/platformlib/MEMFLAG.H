@@ -33,6 +33,14 @@
 #ifndef TD_MEMFLAG_H
 #define TD_MEMFLAG_H
 
+/*=========================================================================*/
+/* The following prototypes are for the file: MEM_COPY.ASM						*/
+/*=========================================================================*/
+
+extern "C" {
+	void Mem_Copy(void const *source, void *dest, unsigned long bytes_to_copy);
+}
+
 inline void *Add_Long_To_Pointer(void const *ptr, long size)
 {
  	return ((void *) ( (char const *) ptr + size));

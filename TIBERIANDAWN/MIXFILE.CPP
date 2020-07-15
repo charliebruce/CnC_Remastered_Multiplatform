@@ -58,6 +58,7 @@
 #include "FILETEMP.H"
 #include "MEMFLAG.H"
 #include	"MIXFILE.H"
+#include "PLATSTRING.H"
 
 template<class T> int Compare(T const *obj1, T const *obj2) {
 	if (*obj1 < *obj2) return(-1);
@@ -65,20 +66,7 @@ template<class T> int Compare(T const *obj1, T const *obj2) {
 	return(0);
 };
 
-#ifndef _MSC_VER
-#define stricmp strcasecmp
 
-char* strupr(char* s)
-{
-    char* tmp = s;
-
-    for (;*tmp;++tmp) {
-        *tmp = static_cast<char>(std::toupper(static_cast<unsigned char>(*tmp)));
-    }
-
-    return s;
-}
-#endif
 
 extern int RequiredCD;
 
