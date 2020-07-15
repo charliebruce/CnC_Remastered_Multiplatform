@@ -235,7 +235,7 @@ void * __cdecl Build_Fading_Table(void const *palette, void const *dest, long in
 /* The following prototype is for the file: CRC.ASM							*/
 /*=========================================================================*/
 
-long __cdecl Calculate_CRC(void *buffer, long length);
+#include "PLATCRC.H"
 
 /*=========================================================================*/
 /* The following prototypes are for the file: DETPROC.ASM						*/
