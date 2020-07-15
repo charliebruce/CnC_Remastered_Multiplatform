@@ -4,7 +4,7 @@
 #ifdef _MSC_VER
 long __cdecl Calculate_CRC(void *buffer, long length);
 #else
-long Calculate_CRC(void *buffer, long length);
+extern "C" long Calculate_CRC(void *buffer, long length);
 #endif
 
 #endif
