@@ -43,16 +43,21 @@
  *   MixFileClass::Free -- Uncaches a cached mixfile.                                          * 
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-
-#include	"function.h"
-#include	<direct.h>
-#include	<fcntl.h>
-#include	<io.h>
-#include	<dos.h>
-#include	<errno.h>
-#include	<share.h>
-#include	"mixfile.h"
-
+#ifndef _MSC_VER
+#include <linux/limits.h>
+#endif
+#include <cctype>
+#include <stdlib.h>
+#include <string.h>
+#include "CCFILE.H"
+#include "CONQUER.H"
+#include "CRC.H"
+#include "DLL.H"
+#include "EXIT.H"
+#include "FATAL.H"
+#include "FILETEMP.H"
+#include "MEMFLAG.H"
+#include	"MIXFILE.H"
 
 template<class T> int Compare(T const *obj1, T const *obj2) {
 	if (*obj1 < *obj2) return(-1);
@@ -60,6 +65,22 @@ template<class T> int Compare(T const *obj1, T const *obj2) {
 	return(0);
 };
 
+#ifndef _MSC_VER
+#define stricmp strcasecmp
+
+char* strupr(char* s)
+{
+    char* tmp = s;
+
+    for (;*tmp;++tmp) {
+        *tmp = static_cast<char>(std::toupper(static_cast<unsigned char>(*tmp)));
+    }
+
+    return s;
+}
+#endif
+
+extern int RequiredCD;
 
 /*
 **	This is the pointer to the first mixfile in the list of mixfiles registered
@@ -476,7 +497,11 @@ bool MixFileClass::Offset(char const *filename, void ** realptr, MixFileClass **
 	/*
 	**	Create the key block that will be used to binary search for the file.
 	*/
+#ifdef _MSC_VER
 	char file_name_copy[_MAX_PATH];
+#else
+	char file_name_copy[PATH_MAX];
+#endif
 	strcpy(file_name_copy, filename);
 	strupr(file_name_copy);
 	long crc = Calculate_CRC(file_name_copy, strlen(file_name_copy));

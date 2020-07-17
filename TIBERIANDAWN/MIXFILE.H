@@ -35,8 +35,9 @@
 #ifndef MIXFILE_H
 #define MIXFILE_H
 
-#include	<wwlib32.h>
-#include	"link.h"
+#include <cstdint>
+
+#include	"LINK.H"
 
 class MixFileClass : public LinkClass 
 {
