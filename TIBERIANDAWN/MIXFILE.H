@@ -62,13 +62,21 @@ class MixFileClass : public LinkClass
 			int operator < (SubBlock & two) const {return (CRC < two.CRC);};
 			int operator > (SubBlock & two) const {return (CRC > two.CRC);};
 			int operator == (SubBlock & two) const {return (CRC == two.CRC);};
+#ifdef _MSC_VER
 		};
+#else
+		} __attribute__ ((packed));
+#endif //_MSC_VER
 
 	private:
 		static MixFileClass * Finder(char const *filename);
 		long Offset(long crc, long *size = 0);
 
+#ifdef _MSC_VER
 		typedef struct {
+#else
+		typedef struct __attribute__ ((packed)) {
+#endif //_MSC_VER
 			short	count;
 			long	size;
 		} FileHeader;

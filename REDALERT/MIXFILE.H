@@ -63,7 +63,11 @@ class MixFileClass : public Node<MixFileClass<T>>
 			int operator < (SubBlock & two) const {return (CRC < two.CRC);};
 			int operator > (SubBlock & two) const {return (CRC > two.CRC);};
 			int operator == (SubBlock & two) const {return (CRC == two.CRC);};
+#ifdef _MSC_VER
 		};
+else
+		} __attribute__ ((packed));
+#endif //_MSC_VER
 
 	private:
 		static MixFileClass * Finder(char const * filename);
@@ -93,7 +97,11 @@ class MixFileClass : public Node<MixFileClass<T>>
 		**	This is the initial file header. It tells how many files are embedded
 		**	within this mixfile and the total size of all embedded files.
 		*/
+#ifdef _MSC_VER
 		typedef struct {
+#else
+		typedef struct __attribute__ ((packed)) {
+#endif //_MSC_VER
 			short	count;
 			long	size;
 		} FileHeader;
