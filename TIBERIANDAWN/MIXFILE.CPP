@@ -452,8 +452,8 @@ int compfunc(void const *ptr1, void const *ptr2)
 //	long diff = *(long const *)ptr1 - *(long const *)ptr2;
 //	return FP_SEG(diff);
 
-	if (*(long const *)ptr1 < *(long const *)ptr2) return(-1);
-	if (*(long const *)ptr1 > *(long const *)ptr2) return(1);
+	if (*(std::int32_t const *)ptr1 < *(std::int32_t const *)ptr2) return(-1);
+	if (*(std::int32_t const *)ptr1 > *(std::int32_t const *)ptr2) return(1);
 	return(0);
 }
 
@@ -488,7 +488,7 @@ int compfunc(void const *ptr1, void const *ptr2)
  * HISTORY:                                                                                    *
  *   10/17/1994 JLB : Created.                                                                 *
  *=============================================================================================*/
-bool MixFileClass::Offset(char const *filename, void ** realptr, MixFileClass ** mixfile, long * offset, long * size)
+bool MixFileClass::Offset(char const *filename, void ** realptr, MixFileClass ** mixfile, std::int32_t * offset, std::int32_t * size)
 {
 	MixFileClass * ptr;
 
