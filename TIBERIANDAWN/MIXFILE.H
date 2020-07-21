@@ -62,6 +62,7 @@ class MixFileClass : public LinkClass
 			}
 		}
 
+		#pragma pack(push, 1)
 		struct SubBlock {
 			std::int32_t CRC;				// CRC code for embedded file.
 			std::int32_t Offset;			// Offset from start of data section.
@@ -70,24 +71,19 @@ class MixFileClass : public LinkClass
 			int operator < (SubBlock & two) const {return (CRC < two.CRC);};
 			int operator > (SubBlock & two) const {return (CRC > two.CRC);};
 			int operator == (SubBlock & two) const {return (CRC == two.CRC);};
-#ifdef _MSC_VER
 		};
-#else
-		} __attribute__ ((packed));
-#endif //_MSC_VER
+		#pragma pack(pop)
 
 	private:
 		static MixFileClass * Finder(char const *filename);
 		std::int32_t Offset(std::int32_t crc, std::int32_t *size = 0);
 
-#ifdef _MSC_VER
+		#pragma pack(push, 1)
 		typedef struct {
-#else
-		typedef struct __attribute__ ((packed)) {
-#endif //_MSC_VER
 			std::int16_t	count;
 			std::int32_t	size;
 		} FileHeader;
+		#pragma pack(pop)
 
 		int Count;							// Number of sub-blocks.
 		std::int32_t DataSize;						// Size of raw data.
