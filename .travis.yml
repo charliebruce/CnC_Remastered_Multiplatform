@@ -1,6 +1,10 @@
 language: cpp
 sudo: required
 dist: focal
+env:
+  global:
+    - TRAVIS_GO_VERSION=1.13.1
+    - GOROOT="${HOME}/.gimme/versions/go${TRAVIS_GO_VERSION}.linux.amd64"
 compiler:
 - clang
 os:
@@ -8,8 +12,15 @@ os:
 before_install:
 - sudo apt-get -y install ninja-build
 before_script:
+- gimme ${TRAVIS_GO_VERSION}
+- export PATH="${HOME}/.gimme/versions/go${TRAVIS_GO_VERSION}.linux.amd64/bin:${PATH}"
+- go version
 - mkdir build
 - cd build
 - cmake .. -GNinja -DCMAKE_C_COMPILER=$CC_FOR_BUILD -DCMAKE_CXX_COMPILER=$CXX_FOR_BUILD
 script:
 - cmake --build .
+- cd "$TRAVIS_BUILD_DIR/cmd/racrc"
+- CGO_LDFLAGS="-L"$TRAVIS_BUILD_DIR/build/REDALERT" -l:libRA_CRC.a" go build
+- cd "$TRAVIS_BUILD_DIR/pkg"
+- CGO_LDFLAGS="-L"$TRAVIS_BUILD_DIR/build/REDALERT" -l:libRA_CRC.a" go test -v ./...

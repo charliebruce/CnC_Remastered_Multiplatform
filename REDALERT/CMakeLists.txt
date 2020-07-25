@@ -9,6 +9,8 @@ target_link_libraries(RA_CRC_TEST_EXE
 add_library(RA_CRC STATIC
     CRC.CPP
     CRC.H
+    INIT_CRC.CPP
+    INIT_CRC.INL
 )
 
 add_test(
